@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curada — Solo lo que merece estar en tu vida</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F9F6F0;
+    --cream-dark: #EDE8DE;
+    --sage: #8A9E8A;
+    --sage-light: #C4D4C4;
+    --sage-dark: #5A7A5A;
+    --terra: #C4775A;
+    --terra-light: #E8C4B4;
+    --charcoal: #2A2724;
+    --charcoal-soft: #4A4540;
+    --muted: #8A857E;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(249, 246, 240, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--cream-dark);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-tagline {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: var(--terra-light);
+    opacity: 0.25;
+    filter: blur(80px);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -10%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    opacity: 0.3;
+    filter: blur(80px);
+  }
+
+  .hero-inner {
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terra);
+    border: 1px solid var(--terra-light);
+    padding: 0.35rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--charcoal-soft);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 0.9rem 2.2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--charcoal-soft);
+    transform: translateY(-1px);
+  }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 1.2rem 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+  }
+
+  /* MANIFESTO */
+  .manifesto {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    text-align: center;
+  }
+
+  .manifesto-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    display: block;
+  }
+
+  .manifesto blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--charcoal);
+    border: none;
+    padding: 0;
+  }
+
+  .manifesto-rule {
+    width: 3rem;
+    height: 1px;
+    background: var(--terra);
+    margin: 2rem auto;
+  }
+
+  .manifesto p {
+    font-size: 0.95rem;
+    color: var(--charcoal-soft);
+    font-weight: 300;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+
+  /* PRODUCTS */
+  .products-section {
+    padding: 5rem 2rem 8rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-bottom: 1px solid var(--cream-dark);
+    padding-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .section-date {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--cream-dark);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(42, 39, 36, 0.08);
+  }
+
+  .product-img-wrap {
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    position: relative;
+  }
+
+  .product-img-wrap img {
+    max-height: 180px;
+    max-width: 100%;
+    object-fit: contain;
+    transition: transform 0.3s;
+  }
+
+  .product-card:hover .product-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: var(--terra);
+    color: var(--white);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+
+  .product-badge.kbeauty {
+    background: var(--sage-dark);
+  }
+
+  .product-badge.hogar {
+    background: var(--charcoal-soft);
+  }
+
+  .product-body {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-brand {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+    color: var(--charcoal);
+  }
+
+  .product-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .stars {
+    color: #D4A853;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+  }
+
+  .reviews-count {
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  .product-why {
+    font-size: 0.88rem;
+    color: var(--charcoal-soft);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .product-note {
+    font-size: 0.78rem;
+    color: var(--muted);
+    border-top: 1px solid var(--cream-dark);
+    padding-top: 0.75rem;
+    margin-bottom: 1.25rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  .product-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--charcoal);
+  }
+
+  .product-price span {
+    font-size: 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .btn-product {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 0.65rem 1.4rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-product:hover {
+    background: var(--terra);
+  }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+    text-align: center;
+  }
+
+  .disclaimer-box {
+    background: var(--cream-dark);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    font-size: 0.82rem;
+    color: var(--charcoal-soft);
+    line-height: 1.8;
+  }
+
+  .disclaimer-box strong {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-sub {
+    font-size: 0.78rem;
+    color: var(--sage-light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .footer-links a {
+    color: var(--sage-light);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--white);
+  }
+
+  .footer-legal {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-card {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .product-card:nth-child(1) { animation-delay: 0.1s; }
+  .product-card:nth-child(2) { animation-delay: 0.2s; }
+  .product-card:nth-child(3) { animation-delay: 0.3s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 0 1.25rem; }
+    .nav-tagline { display: none; }
+    .products-section { padding: 4rem 1.25rem 6rem; }
+    .manifesto { padding: 4rem 1.5rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Curada</a>
+  <span class="nav-tagline">Solo lo que merece estar en tu vida</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Belleza · Hogar · K-Beauty</span>
+    <h1>Solo lo que <em>merece</em><br>estar en tu vida</h1>
+    <p class="hero-sub">No somos influencers. Somos quienes leen 500 reseñas para que tú no tengas que hacerlo. Cada producto aquí pasó un filtro real.</p>
+    <a href="#productos" class="btn-primary">Ver productos seleccionados</a>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  Sin patrocinios &nbsp;·&nbsp; Sin relleno &nbsp;·&nbsp; Solo lo que pasa el filtro
+</div>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <span class="manifesto-label">Nuestra filosofía</span>
+  <blockquote>"No recomendamos todo lo que paga comisión. Recomendamos lo que nos recomendaríamos a nosotras mismas."</blockquote>
+  <div class="manifesto-rule"></div>
+  <p>Cada producto en Curada tiene mínimo 4.5 estrellas, más de 100 reseñas verificadas y un vendedor de confianza. Si algo no cumple, simplemente no está aquí. Si encontramos algo que no nos gustó, lo decimos.</p>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="products-section" id="productos">
+  <div class="section-header">
+    <h2 class="section-title">Selección de marzo 2026</h2>
+    <span class="section-date">Actualizado · 22 mar 2026</span>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- Producto 1: L'Oréal -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="product-badge">⭐ Favorito</span>
+        <img src="https://http2.mlstatic.com/D_NQ_NP_686651-MLA75236726375_032024-O.webp" alt="L'Oréal Revitalift Sérum Ácido Hialurónico" onerror="this.src='https://via.placeholder.com/200x200/F9F6F0/8A9E8A?text=L%27Oréal'">
+      </div>
+      <div class="product-body">
+        <p class="product-brand">L'Oréal Paris · Tienda Oficial</p>
+        <h3 class="product-name">Revitalift Sérum Ácido Hialurónico 30ml</h3>
+        <div class="product-stars">
+          <span class="stars">★★★★★</span>
+          <span class="reviews-count">4.8 · 61,267 reseñas verificadas</span>
+        </div>
+        <p class="product-why">Fórmula clínica con 1.5% de ácido hialurónico puro. Sin fragancia, sin parabenos. Más de 750 mil personas lo compraron en Mercado Libre — eso es más confiable que cualquier reseña personal.</p>
+        <p class="product-note">✓ Lo conocemos de primera mano: ingredientes clínicamente probados, absorción rápida y sin pegajosidad según el 89% de las reseñas.</p>
+        <div class="product-footer">
+          <div class="product-price">$174 <span>MXN · 52% OFF</span></div>
+          <a href="https://meli.la/1SMgJnT" target="_blank" rel="nofollow" class="btn-product">Ver en ML →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 2: Seyoul -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="product-badge kbeauty">K-Beauty</span>
+        <img src="https://http2.mlstatic.com/D_NQ_NP_963990-MLA73560927765_122023-O.webp" alt="Seyoul Sérum 21 Días" onerror="this.src='https://via.placeholder.com/200x200/F9F6F0/5A7A5A?text=Seyoul+21+Días'">
+      </div>
+      <div class="product-body">
+        <p class="product-brand">SEYOUL · Tienda Oficial K-Beauty</p>
+        <h3 class="product-name">Sérum Cuidado Facial 21 Días — 21 Ampollas</h3>
+        <div class="product-stars">
+          <span class="stars">★★★★½</span>
+          <span class="reviews-count">4.7 · 212 reseñas · +10mil vendidos</span>
+        </div>
+        <p class="product-why">Rutina coreana de 21 noches con ampollas de dosis exacta. Formulado para todo tipo de piel. La ciencia coreana del skincare en un formato sin complicaciones: una ampolla por noche, resultados acumulativos.</p>
+        <p class="product-note">📦 Envío gratis directo · Tienda oficial verificada · Vendedor con +10mil ventas en ML.</p>
+        <div class="product-footer">
+          <div class="product-price">$379 <span>MXN · 16% OFF</span></div>
+          <a href="https://meli.la/1XHcnA9" target="_blank" rel="nofollow" class="btn-product">Ver en ML →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Producto 3: Doremama -->
+    <div class="product-card">
+      <div class="product-img-wrap">
+        <span class="product-badge hogar">Hogar</span>
+        <img src="https://http2.mlstatic.com/D_NQ_NP_757432-MLA74069124741_012024-O.webp" alt="Doremama Organizador Giratorio 360°" onerror="this.src='https://via.placeholder.com/200x200/F9F6F0/4A4540?text=Organizador+360°'">
+      </div>
+      <div class="product-body">
+        <p class="product-brand">DOREMAMA · MercadoLíder Platinum</p>
+        <h3 class="product-name">Organizador Giratorio 360° para Maquillaje y Escritorio</h3>
+        <div class="product-stars">
+          <span class="stars">★★★★★</span>
+          <span class="reviews-count">4.8 · 58 reseñas · Vendedor +10mil ventas</span>
+        </div>
+        <p class="product-why">5 compartimentos giratorios que organizan brochas, skincare, lápices y utensilios. La transformación visual es inmediata. Ideal para tocador, escritorio o cocina.</p>
+        <p class="product-note">⚠️ Honestidad Curada: el envío gratis se activa al armar un carrito Full de $149+. El vendedor es MercadoLíder Platinum con +10mil ventas verificadas.</p>
+        <div class="product-footer">
+          <div class="product-price">$134 <span>MXN · 70% OFF</span></div>
+          <a href="https://meli.la/1orwzKo" target="_blank" rel="nofollow" class="btn-product">Ver en ML →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DISCLAIMER HONESTO -->
+<div class="disclaimer">
+  <div class="disclaimer-box">
+    <strong>Transparencia total:</strong> Curada usa links de afiliada — si compras a través de ellos, recibimos una pequeña comisión sin costo adicional para ti. Nunca incluimos un producto solo porque paga bien. Nuestro filtro va primero, siempre.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Curada</div>
+  <p class="footer-sub">Solo lo que merece estar en tu vida</p>
+  <div class="footer-links">
+    <a href="https://tiktok.com/@curada.mx" target="_blank">TikTok</a>
+    <a href="https://instagram.com/curada.mx" target="_blank">Instagram</a>
+    <a href="/cdn-cgi/l/email-protection#43302c2e2c306d20363122272203242e222a2f6d202c2e">Contacto</a>
+  </div>
+  <p class="footer-legal">
+    © 2026 Curada · Selección honesta de productos.<br>
+    Los precios pueden variar. Verifica siempre el precio final en Mercado Libre antes d
